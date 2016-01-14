@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 // Add hello module
 var hellobot = require('./hellobot');
+var capelobot = require ('./capelobot');
 
 var app = express();
 var port = process.env.PORT || 3000;
@@ -14,6 +15,8 @@ app.get('/', function (req, res) { res.status(200).send('Hello world!') });
 
 // Add route that listens for a POST to /hello
 app.post('/hello', hellobot);
+
+app.post('/capelo',capelobot);
 
 // error handler
 app.use(function (err, req, res, next) {
