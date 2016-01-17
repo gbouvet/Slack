@@ -18,15 +18,18 @@ module.exports = function (req, res, next) {
 		var copyW = new String(words[i].toString());
 		words[i] = words[i].toLowerCase()
 		while ((match = pattern.exec(words[i])) != null) {
-			if (words[i].length > 3 && match.index > 0 && match.index > (words[i].length - 4)) {
-				console.log('DEBUG 5 : match à traiter');
+			if (words[i].length > 3 
+			&& match.index > 0 
+			&& match.index > (words[i].length - 5)) {
 				words[i] = words[i].toString().replace(pattern, "al");
 				var tmp1W = copyW.toString().substring(0,match.index);
 				var tmp2W = copyW.toString().substring(match.index,copyW.length);
-				processedWord = tmp1W + tmp2W.replace(pattern, "al");
-				isWordProcessed = 1;
-				if (isPertinent == 0) {
-					isPertinent = 1;
+				if(!(/o[^nmiu]/g.test(tmp2W))) {
+					processedWord = tmp1W + tmp2W.replace(pattern, "al");
+					isWordProcessed = 1;
+					if (isPertinent == 0) {
+						isPertinent = 1;
+					}
 				}
 			}
 		}
