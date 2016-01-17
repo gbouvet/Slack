@@ -18,7 +18,7 @@ module.exports = function (req, res, next) {
 		var copyW = new String(words[i].toString());
 		words[i] = words[i].toLowerCase()
 		while ((match = pattern.exec(words[i])) != null) {
-			if (words[i].length > 3 && match.index > 1 && match.index > (words[i].length - 4)) {
+			if (words[i].length > 3 && match.index > 0 && match.index > (words[i].length - 4)) {
 				console.log('DEBUG 5 : match à traiter');
 				words[i] = words[i].toString().replace(pattern, "al");
 				var tmp1W = copyW.toString().substring(0,match.index);
