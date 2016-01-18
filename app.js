@@ -6,7 +6,7 @@ var capelobot = require ('./capelobot');
 
 var app = express();
 var port = process.env.PORT || 3000;
-
+//console.log('DEBUG_');
 // body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 
