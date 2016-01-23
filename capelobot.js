@@ -52,7 +52,6 @@ module.exports = function (req, res, next) {
 					}
 				} else if (patternAu.test(copyW)) {
 					var lastIndxAu = copyW.toString().lastIndexOf('au');
-					console.log("DEBUG lastIndxAu :" + lastIndxAu);
 					if(lastIndxAu == copyW.length - 3 || lastIndxAu == copyW.length - 2 ) {
 						var firstPart = copyW.toString().substring(0,lastIndxAu);
 						var secondPart = copyW.toString().substring(lastIndxAu,copyW.length);
