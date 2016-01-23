@@ -1,7 +1,7 @@
 module.exports = function (req, res, next) {
 	var userName = req.body.user_name;
 	var text = req.body.text;
-	var pattern = /o[^imnu]|eau|au/;
+	var pattern = /o[^imnu]|eau|au/g;
 	var patternO = /o[^imnu]/;
 	var patternAu = /au/;
 	var patternEau = /eau/;
@@ -22,17 +22,18 @@ module.exports = function (req, res, next) {
 					var lastIndxO = copyW.toString().lastIndexOf('o');
 					if(lastIndxO == copyW.length - 1 || lastIndxO == copyW.length - 2 ) {
 						var firstPart = copyW.toString().substring(0,lastIndxO);
-						var secondPart = copyW.toString().substring(lastIndxO,lastIndxO + 1);
+						var secondPart = copyW.toString().substring(lastIndxO,copyW.length);
+						console.log('Debug o secondPart : ' + secondPart);
 						processedWord = firstPart + secondPart.replace(patternO, "al");
 						if (isPertinent == 0) {
 							isPertinent = 1;
 						}
 					}
-				} else if (patternEau.test(words[i])) {
-					var lastIndxEau = words[i].toString().lastIndexOf('eau');
-					if(lastIndxEau == words[i].length - 3 || lastIndxEau == words[i].length - 4 ) {
+				} else if (patternEau.test(copyW)) {
+					var lastIndxEau = copyW.toString().lastIndexOf('eau');
+					if(lastIndxEau == copyW.length - 4 || lastIndxEau == copyW.length - 3 ) {
 						var firstPart = copyW.toString().substring(0,lastIndxEau);
-						var secondPart = copyW.toString().substring(lastIndxEau,lastIndxEau + 3);
+						var secondPart = copyW.toString().substring(lastIndxEau,copyW.length);
 						processedWord = firstPart + secondPart.replace(patternEau, "al");
 						if (isPertinent == 0) {
 							isPertinent = 1;
@@ -42,7 +43,8 @@ module.exports = function (req, res, next) {
 					var lastIndxAu = copyW.toString().lastIndexOf('au');
 					if(lastIndxAu == copyW.length - 2 || lastIndxAu == copyW.length - 3 ) {
 						var firstPart = copyW.toString().substring(0,lastIndxAu);
-						var secondPart = copyW.toString().substring(lastIndxAu,lastIndxAu + 2);
+						var secondPart = copyW.toString().substring(lastIndxAu,copyW.length);
+						console.log('Debug au secondPart : ' + secondPart);
 						processedWord = firstPart + secondPart.replace(patternAu, "al");
 						if (isPertinent == 0) {
 							isPertinent = 1;
