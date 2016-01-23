@@ -16,9 +16,9 @@ module.exports = function (req, res, next) {
 		processedWord = words[i];
 		var copyW = new String(words[i].toString());
 		words[i] = words[i].toLowerCase();
-		while ((match = patternO.exec(words[i])) != null) {
+		while ((match = pattern.exec(words[i])) != null) {
+			words[i] = words[i].toString().replace(pattern, "al");
 			if (words[i].length >= 3 && match.index > 0 ) {
-				words[i] = words[i].toString().replace(pattern, "al");
 				if (patternOX.test(copyW)) {
 					var lastIndxO = copyW.toString().lastIndexOf('o');
 					if(lastIndxO == copyW.length - 2 ) {
@@ -52,7 +52,8 @@ module.exports = function (req, res, next) {
 					}
 				} else if (patternAu.test(copyW)) {
 					var lastIndxAu = copyW.toString().lastIndexOf('au');
-					if(lastIndxAu == copyW.length - 2 || lastIndxAu == copyW.length - 3 ) {
+					console.log("DEBUG lastIndxAu :" + lastIndxAu);
+					if(lastIndxAu == copyW.length - 3 || lastIndxAu == copyW.length - 2 ) {
 						var firstPart = copyW.toString().substring(0,lastIndxAu);
 						var secondPart = copyW.toString().substring(lastIndxAu,copyW.length);
 						secondPart = secondPart.substring(0,secondPart.lastIndexOf('au')+2);
